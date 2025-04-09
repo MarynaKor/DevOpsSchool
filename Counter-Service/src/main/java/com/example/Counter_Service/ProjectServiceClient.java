@@ -53,9 +53,9 @@ public class ProjectServiceClient {
         return Arrays.asList(projects);
 
     }
-    @Bean
+
     public Project updateProject(Project project) {
-        return this.restClient.put()
+        return restClient.put()
                 .uri(projectServiceUrl + "/update/project")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(project)
