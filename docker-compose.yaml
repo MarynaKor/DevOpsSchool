@@ -13,6 +13,7 @@ services:
       - './Project/src/main/resources/data.sql:/docker-entrypoint-initdb.d/data.sql'
     restart: 'always'
 
+
   backend:
     build: ./Project/
     container_name: backend
