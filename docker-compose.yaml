@@ -23,21 +23,21 @@ services:
       db-url: 'jdbc:postgresql://postgres:5432/projects'
       db-username: 'project'
       db-password: 'secret'
-    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://backend:8081/actuator/health | grep UP || exit 1" ]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
     depends_on:
       - 'postgres'
 
   counter:
     build: ./Counter-Service/
     container_name: counter
-    #environment:
-      #OTEL_EXPORTER_OTLP_ENDPOINT: 'http://otel-collector:4318' es it schon in der application properties
     ports:
       - '8082:8082'
-    restart: always
     depends_on:
       backend:
-        condition: service_started
-
-
+        condition: service_healthy
   
