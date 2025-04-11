@@ -41,3 +41,11 @@ services:
       backend:
         condition: service_healthy
   
+  prometheus:
+    image: prom/prometheus:v2.45.3
+    container_name: prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./Counter-Service/prometheus:/etc/prometheus
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml

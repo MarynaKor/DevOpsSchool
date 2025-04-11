@@ -1,7 +1,5 @@
 package com.example.Counter_Service;
 
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration;
@@ -24,18 +22,11 @@ public class CounterController {
     private static final Logger log = LoggerFactory.getLogger(CounterController.class);
     private final ProjectServiceClient projectServiceClient;
     private final PositionServiceClient positionServiceClient;
-    private final Counter ProjectCounter;
-    private final Counter PositionCounter;
 
-    public CounterController(ProjectServiceClient projectServiceClient, ProjectInfoAutoConfiguration projectInfoAutoConfiguration, PositionServiceClient positionServiceClient, MeterRegistry registry) {
+    public CounterController(ProjectServiceClient projectServiceClient, ProjectInfoAutoConfiguration projectInfoAutoConfiguration, PositionServiceClient positionServiceClient) {
         this.projectServiceClient = projectServiceClient;
         this.positionServiceClient = positionServiceClient;
-        this.ProjectCounter =  Counter.builder("update_project_in_total").
-                description("How many projects were changed. Displayed with increments").
-                register(registry);
-        this.PositionCounter =  Counter.builder("update_position_in_total").
-                description("How many positions were changed. Displayed with increments").
-                register(registry);
+
     }
 
 
@@ -82,7 +73,6 @@ public class CounterController {
         List<PersonProjectPosition> changedPosition = new ArrayList<>();
         for (Integer id : iDS) {
             log.info("Updating the days for the Position with ID: {}", id);
-            PositionCounter.increment();
             changedPosition.add(getAndUpdatePosition(id));
         }
         return changedPosition;
@@ -97,7 +87,6 @@ public class CounterController {
         List<Project> changedProjects = new ArrayList<>();
         for (Integer id : iDS) {
             log.info("Updating the days for the Project with ID: {}", id);
-            ProjectCounter.increment();
             changedProjects.add(getAndUpdateProject(id));
         }
         return changedProjects;
