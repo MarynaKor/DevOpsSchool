@@ -10,10 +10,14 @@
         <module name="Counter-Service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="alertmanager" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Counter-Service" options="-parameters" />
+      <module name="alertmanager" options="-parameters" />
     </option>
   </component>
 </project>

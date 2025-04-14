@@ -49,3 +49,10 @@ services:
     volumes:
       - ./Counter-Service/prometheus:/etc/prometheus
     command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
+
+  alertmanager:
+     image: prom/alertmanager:latest
+     ports:
+       - '9093:9093'
+     volumes:
+       - ./Counter-Service/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml

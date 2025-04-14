@@ -1,27 +1,16 @@
 groups:
-  # bad exemple for a rule since this is a counter and the amount can only go up, never down so this rule will fire after reaching the limit for ever
-  #- name: Too many Projects get overwritten
-  #  rules:
-  #    - alert: LoopOverwork
-  #      expr: sum(update_project_in_total{job="Counter-Service"}) > 5sum(update_project_in_total{job="Counter-Service"}) > 5
-  #      for: 1m
-  #      keep_firing_for: 5m
-  #      labels:
-  #        severity: warning
-  #      annotations:
-  #        summary: Loop is overwriting too many projects
+  - name: Too many Objects get overwritten
+    rules:
+      - alert: LoopOverwork
+        expr: sum(update_project_in_total{job="Counter-Service"}) > 5
+        for: 1m
+        keep_firing_for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: Loop is overwriting too many projects
 
-    - alert: too many Projects get overwritten in the span of 5 min
-      expr: max_over_time(update_project_in_total[5m])-min_over_time(update_project_in_total[5m])
-        > 5
-      for: 1m
-      keep_firing_for: 5m
-      labels:
-        severity: warning
-      annotations:
-        summary: Loop is overwriting too many projects
-
-  #generic alert if a service is down
+    #generic alert if a service is down
   #- alert: PrometheusJobMissing
   #  expr: absent(up{job="prometheus"})
   #  for: 0m
