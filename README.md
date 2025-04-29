@@ -14,5 +14,9 @@ Ex2 : Create your own Metric, which shows the functionality of the counter servi
 
 Ex3 :  Based on the previous metric, create a rule in Prometheus, which shows that the iteration is only running through as many times as there are active projects.
        Anhand dieser Metrik erstelle eine Regel in Prometheus, mit der überprüft wird das die Schleife in einem bestimmten Zeitspanne nicht zu oft durchläuft.
+
+Ex4 :
+       Build another container for the Alertmanager.
+
        
 
