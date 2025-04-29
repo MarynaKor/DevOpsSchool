@@ -2,7 +2,7 @@
 Here is the full description of all the excercises.
 - - -
 
-Ex0 :  
+Ex0 :
        Expose all the metrics to .../actuator/prometheus.
        Setze alle Metriken auf den Endpunkt .../actuator/prometheus aus
 
